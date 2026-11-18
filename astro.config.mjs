@@ -6,10 +6,12 @@ export default defineConfig({
   site: 'https://z4gon.github.io',
   integrations: [
     preact({
-      compat: true, // render React components
+      // render React components
+      compat: true,
     }),
   ],
   markdown: {
+    // code syntax highlighting
     shikiConfig: {
       theme: 'one-dark-pro',
     },

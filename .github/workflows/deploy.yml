@@ -14,7 +14,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          lfs: true # github pages artifact needs the actual assets from git lfs
+          # github pages artifact needs the actual assets from git lfs
+          lfs: true
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
@@ -23,7 +24,8 @@ jobs:
       - run: npm run check
       - run: npm run format:check
       - run: npm run build
-      - run: touch dist/.nojekyll # tell github pages to not use jekyll
+      # tell github pages to not use jekyll
+      - run: touch dist/.nojekyll
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
@@ -48,10 +50,13 @@ jobs:
 
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
-      pages: write # to deploy to Pages
-      id-token: write # to verify the deployment originates from an appropriate source
+      # Deploy to Pages
+      pages: write
+      # Verify the deployment originates from an appropriate source
+      id-token: write
 
-    concurrency: deploy-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    # Recommended if you intend to make multiple deployments in quick succession.
+    concurrency: deploy-${{ github.ref }}
 
     # Deploy to the github-pages environment
     environment:
