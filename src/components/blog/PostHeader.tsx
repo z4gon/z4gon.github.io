@@ -1,6 +1,6 @@
 import { authors } from '../../config'
+import DateTag from '../DateTag'
 import Avatar from './Avatar'
-import DateFormatter from './DateFormatter'
 import HeroImage from './HeroImage'
 import PostTitle from './PostTitle'
 import styles from './PostHeader.module.scss'
@@ -31,7 +31,7 @@ const PostHeader = ({
       <PostTitle>{title}</PostTitle>
       <div className={styles.authorAndDate}>
         <Avatar name={authorData.name} pictureUrl={authorData.pictureUrl} />
-        <DateFormatter dateString={date} includeDay />
+        <DateTag dateIsoString={date} includeDay />
       </div>
       {excerpt && <p className={styles.excerpt}>{excerpt}</p>}
       {heroVideoUrl ? (

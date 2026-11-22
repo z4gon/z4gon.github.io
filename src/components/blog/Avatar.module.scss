@@ -1,3 +1,5 @@
+$avatar-optical-offset: -2px;
+
 .avatar {
   display: flex;
   align-items: center;
@@ -12,6 +14,8 @@
     margin-left: 10px;
     font-size: 1.1em;
     font-weight: bold;
+    // optical alignment next to the date pill
+    transform: translateY($avatar-optical-offset);
   }
 
   &.small {

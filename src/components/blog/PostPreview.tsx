@@ -1,8 +1,8 @@
 import type { BlogPostPreview } from '../../models/BlogPost'
 import { authors } from '../../config'
+import DateTag from '../DateTag'
 import Link from '../link/Link'
 import Avatar from './Avatar'
-import DateFormatter from './DateFormatter'
 import styles from './PostPreview.module.scss'
 
 type PostPreviewProps = BlogPostPreview
@@ -36,7 +36,7 @@ const PostPreview = ({
             pictureUrl={authorData.pictureUrl}
             small
           />
-          <DateFormatter dateString={date} />
+          <DateTag dateIsoString={date} />
         </div>
       </div>
     </section>
