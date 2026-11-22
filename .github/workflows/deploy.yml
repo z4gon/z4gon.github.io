@@ -12,10 +12,21 @@ jobs:
     name: Format Check + Build
     runs-on: ubuntu-latest
     steps:
+      # lfs: false = pointer files only, no media download
+      # pointer files embed each file's sha256, so hashing them gives a content key for public/res
       - uses: actions/checkout@v4
         with:
-          # github pages artifact needs the actual assets from git lfs
-          lfs: true
+          lfs: false
+      # saves lfs bandwidth quota:
+      # - unchanged media -> exact hit on the content hash
+      # - changed media -> restore-keys pulls the latest lfs-* cache, so lfs pull below only fetches new objects
+      - uses: actions/cache@v4
+        with:
+          path: .git/lfs
+          key: lfs-${{ hashFiles('public/res/**/*') }}
+          restore-keys: lfs-
+      # materialize real media; downloads only missing objects, zero on exact hit
+      - run: git lfs install && git lfs pull
       - uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
